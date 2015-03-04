@@ -49,9 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NestedQueryFact.cs" />
     <Compile Include="OrmFactBase.cs" />
-    <Compile Include="BasicOperationFact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
