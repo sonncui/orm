@@ -1,32 +1,12 @@
-﻿using System;
-using System.Linq;
-using NHibernate;
+﻿using System.Linq;
 using NHibernate.Linq;
 using OrmExample.Resource;
 using Xunit;
 
 namespace OrmExample.Test
 {
-    public class OrmFacts : IDisposable
+    public class BasicOperationFact : OrmFactBase
     {
-        private readonly ISession session;
-
-        public OrmFacts()
-        {
-            session = NhibernateHelper.OpenSession();
-            CleanDatabase();
-        }
-
-        private void CleanDatabase()
-        {
-            session.CreateSQLQuery("delete from [User] where Id > 2").ExecuteUpdate();
-            session.CreateSQLQuery("delete from [order] where id > 1").ExecuteUpdate();
-            session.CreateSQLQuery("delete from [order_items] where id > 3").ExecuteUpdate();
-            session.CreateSQLQuery("delete from [product] where id > 3").ExecuteUpdate();
-            session.CreateSQLQuery("delete from [user_detail] where id > 3").ExecuteUpdate();
-            session.Flush();
-        }
-
         [Fact]
         public void should_select_user()
         {
@@ -81,19 +61,12 @@ namespace OrmExample.Test
             Assert.Equal(1, shejingCount);
         }
 
-
-
         private void AddUser(string name)
         {
             var user = new User { Name = name };
 
             session.Save(user);
             session.Flush();
-        }
-
-        public void Dispose()
-        {
-            session.Dispose();
         }
     }
 }
