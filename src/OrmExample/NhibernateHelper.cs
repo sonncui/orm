@@ -21,12 +21,12 @@ namespace OrmExample
 
         private static void InitializeSessionFactory()
         {
-            var connectionString = MsSqlConfiguration.MsSql2008.ConnectionString(
-                @"Data Source=localhost;Initial Catalog=orm_example;Integrated Security=True");
+            const string connectionString = 
+                "Data Source=localhost;Initial Catalog=orm_example;Integrated Security=True";
 
             _sessionFactory = Fluently
                 .Configure()
-                .Database(connectionString)
+                .Database(MsSqlConfiguration.MsSql2008.ShowSql().ConnectionString(connectionString))
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<NhibernateHelper>())
                 .BuildSessionFactory();
         }
