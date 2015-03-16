@@ -69,6 +69,9 @@ namespace OrmExample.Test
             session.Delete(order);
             session.Flush();
             Assert.Equal(0, session.Query<Order>().Count(o => o.User.Name == "doudou"));
+            Assert.Equal(1, session.Query<User>().Count(u => u.Name == "doudou"));
+            Assert.Equal(0, session.Query<OrderItem>().Count(oi => oi.Product.Name == "lulu"));
+            Assert.Equal(0, session.Query<Product>().Count(product => product.Name == "lulu"));
         }
     }
 }
